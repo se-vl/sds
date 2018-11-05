@@ -47,21 +47,22 @@ In der Datei `package.json` muss der Eintrag für `lgv-config` um `-public` erg�
 In der Datei `portal/master/config.js` folgende Änderungen vornehmen, sonst wird die Landkarte nicht angezeigt:
 
 ```diff
-- layerConf: "../node_modules/lgv-config/services-fhhnet-ALL.json",
-+ layerConf: '../node_modules/lgv-config/services-internet.json',
+- layerConf: "/lgv-config/services-fhhnet-ALL.json",
++ layerConf: '/lgv-config/services-internet.json',
 
-- restConf: "../node_modules/lgv-config/rest-services-fhhnet.json",
-+ restConf: '../node_modules/lgv-config/rest-services-internet.json',
+- restConf: "/lgv-config/rest-services-fhhnet.json",
++ restConf: '/lgv-config/rest-services-internet.json',
 
-- styleConf: "../node_modules/lgv-config/style_v2.json",
-+ styleConf: "../node_modules/lgv-config/style.json",
+- styleConf: "/lgv-config/style_v2.json",
++ styleConf: "/lgv-config/style.json",
 ```
 
 In der Datei `modules/core/modelList/list.js` folgende Zeilen auskommentieren, sonst werden die Werkzeuge nicht angezeigt:
 
 ```diff
--    PrintV2 = require("modules/tools/print_/model"),
-+ // PrintV2 = require("modules/tools/print_/model"),
+-    import PrintV2 from "../../tools/print_/model";
++ // import PrintV2 from "../../tools/print_/model";
+
 
 -    return new PrintV2(attrs, options);
 + // return new PrintV2(attrs, options);
@@ -72,35 +73,37 @@ In der Datei `modules/core/modelList/list.js` folgende Zeilen auskommentieren, s
 ## Master Portal installieren
 
 ```
-C:\Users\Max\git\lgv> npm run installMasterportal
+C:\Users\Max\git\lgv> npm install
+```
 
-...
+## Aktualisieren der Abhängigkeiten
 
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value.
-Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
-
-
-C:\Users\Max\git\lgv> npm install -g grunt-cli
-
-
-C:\Users\Max\git\lgv> grunt less:bootstrapDev
-Done, without errors.
-
-C:\Users\Max\git\lgv> grunt less:bootstrapBuild
-Done, without errors.
+```
+C:\Users\Max\git\lgv> npm update
 ```
 
 ## Master Portal starten
 
 ```
-C:\Users\Max\git\lgv> grunt server
+C:\Users\Max\git\lgv> npm start
 ```
 
 (Die gängigen Browser werden darauf hinweisen, dass die Verbindung unsicher ist.)
 
 Im Browser zu https://localhost:9001/portal/master durchklicken
+
+## Tests durchführen
+
+```
+C:\Users\Max\git\lgv> npm test
+```
+
+## Masterportal zur Veröffentlichung bauen
+
+```
+C:\Users\Max\git\lgv> npm run build
+```
+Das Masterportal wird gebaut und in den Ordner dist/ abgelegt.
 
 ## Das erste eigene Modul
 
