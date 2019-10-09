@@ -1,10 +1,8 @@
 ## Erforderliche Software
 
-Auf den Labor-Rechnern ist die erforderliche Software bereits installiert!
-
-1. [Visual Studio Code](https://code.visualstudio.com/download)
-2. [Node.js](https://nodejs.org/en/download)
-3. [Git](https://git-scm.com/download)
+1. https://code.visualstudio.com/download
+2. https://nodejs.org/en/download
+3. https://git-scm.com/download
 
 ## git-Repository klonen
 
@@ -13,98 +11,51 @@ Git Bash oder Windows PowerShell **als Administrator** ausführen
 ```
 C:\Users\Max> mkdir git
 C:\Users\Max> cd git
-C:\Users\Max\git> git clone https://bitbucket.org/lgv-g12/lgv.git
+C:\Users\Max\git> git clone https://bitbucket.org/geowerkstatt-hamburg/masterportal.git
 
-C:\Users\Max\git> cd lgv
-C:\Users\Max\git\lgv>
+C:\Users\Max\git> cd masterportal
+C:\Users\Max\git\masterportal>
 ```
 
 ## Node-Installation testen
 
 ```
-C:\Users\Max\git\lgv> node -v
-v8.y.z
+C:\Users\Max\git\masterportal> node -v
+v10.y.z
 
-C:\Users\Max\git\lgv> npm -v
-5.y.z
+C:\Users\Max\git\masterportal> npm -v
+6.y.z
 ```
 
-## Konfiguration anpassen
-
-Visual Studio Code aus der Kommandozeile heraus starten:
+## Masterportal installieren
 
 ```
-C:\Users\Max\git\lgv> code .
+C:\Users\Max\git\masterportal> npm install
+
+npm WARN deprecated tsml@1.0.1: no longer maintained
+npm WARN deprecated core-js@1.2.7: core-js@<2.6.8 is no longer maintained. Please, upgrade to core-js@3 or at least to actual version of core-js@2.
+...
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN mocha-webpack@2.0.0-beta.0 requires a peer of mocha@>=4 <=5 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 1263 packages from 1662 contributors and audited 15011 packages in 55.851s
+found 0 vulnerabilities
 ```
 
-In der Datei `package.json` muss der Eintrag für `lgv-config` um `-public` ergänzt werden:
-
-```diff
-- "lgv-config": "git+https://bitbucket.org/lgv-g12/lgv-config.git",
-+ "lgv-config": "git+https://bitbucket.org/lgv-g12/lgv-config-public.git",
-```
-
-In der Datei `portal/master/config.js` folgende Änderungen vornehmen, sonst wird die Landkarte nicht angezeigt:
-
-```diff
-- layerConf: "/lgv-config/services-fhhnet-ALL.json",
-+ layerConf: '/lgv-config/services-internet.json',
-
-- restConf: "/lgv-config/rest-services-fhhnet.json",
-+ restConf: '/lgv-config/rest-services-internet.json',
-
-- styleConf: "/lgv-config/style_v2.json",
-+ styleConf: "/lgv-config/style.json",
-```
-
-In der Datei `modules/core/modelList/list.js` folgende Zeilen auskommentieren, sonst werden die Werkzeuge nicht angezeigt:
-
-```diff
--    import PrintV2 from "../../tools/print_/model";
-+ // import PrintV2 from "../../tools/print_/model";
-
-
--    return new PrintV2(attrs, options);
-+ // return new PrintV2(attrs, options);
-```
-
-**Speichern der Änderungen** nicht vergessen!
-
-## Master Portal installieren
+## Masterportal starten
 
 ```
-C:\Users\Max\git\lgv> npm install
-```
-
-## Aktualisieren der Abhängigkeiten
-
-```
-C:\Users\Max\git\lgv> npm update
-```
-
-## Master Portal starten
-
-```
-C:\Users\Max\git\lgv> npm start
+C:\Users\Max\git\masterportal> npm start
 ```
 
 (Die gängigen Browser werden darauf hinweisen, dass die Verbindung unsicher ist.)
 
 Im Browser zu https://localhost:9001/portal/master durchklicken
 
-## Tests durchführen
-
-```
-C:\Users\Max\git\lgv> npm test
-```
-
-## Masterportal zur Veröffentlichung bauen
-
-```
-C:\Users\Max\git\lgv> npm run build
-```
-Das Masterportal wird gebaut und in den Ordner dist/ abgelegt.
+Anschließend die Url zu https://localhost:9001/portal/basic ändern
 
 ## Das erste eigene Modul
 
-https://bitbucket.org/lgv-g12/lgv/src/28b785547e0b5e56a4752bc4d82c979b6a389f16/doc/02_tutorial_new_module_scale_switcher.md
+https://bitbucket.org/geowerkstatt-hamburg/masterportal/wiki/how_to_write_a_module
